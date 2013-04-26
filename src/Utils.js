@@ -1,6 +1,4 @@
 var utils = {
-
-
     /**
      * Sort given array by provided rule in comparator function
      * @param {Array} list
@@ -8,7 +6,7 @@ var utils = {
      */
 
     sort:function (list, comparator) {
-        return [];
+        return list.sort(comparator);
     },
 
     /**
@@ -18,7 +16,7 @@ var utils = {
      */
 
     capitalize:function (string) {
-        return "";
+        return string[0].toUpperCase() + string.substr(1, string.length);
     },
 
     /**
@@ -28,7 +26,13 @@ var utils = {
      */
 
     camelize:function (string) {
-        return "";
+        var temp = new Array();
+        var result = "";
+        temp = string.split(" ");
+        for (var i = 0; i < temp.length; i ++){
+            result += this.capitalize(this.trim(temp[i]));
+        }
+        return result;
     },
 
     /**
@@ -38,7 +42,15 @@ var utils = {
      */
 
     trim:function (str) {
-        return "";
+        var start = 0;
+        while (str[start] == " "){
+            start++;
+        }
+        var end = str.length-1;
+        while (str[end] == " "){
+            end--;
+        }
+        return str.slice(start, end+1);
     },
 
     /**
@@ -49,7 +61,10 @@ var utils = {
      */
 
     map:function (list, iterator) {
-        return [];
+        for (var i = 0; i < list.length; i++){
+            list[i] =  iterator(list[i]);
+        }
+        return list;
     },
 
     /**
@@ -60,7 +75,12 @@ var utils = {
      */
 
     groupBy:function (list, iterator) {
-        return {};
+        var result = {};
+        for (var i = 0; i < list.length; i++){
+           var type = typeof list[i];
+            result[type] =  (result[type] === undefined) ? [] : result[type];
+            result[type].push(list[i]);
+        }
+        return result;
     }
-
 };
