@@ -22,12 +22,12 @@ var utils = {
     },
 
     /**
-     * Camelize given string or array of string
-     * @param {Array|String} sequence
-     * @return {String} capitalized string
+     * Camelize given string
+     * @param {String} string
+     * @return {String} in camelCase
      */
 
-    camelize:function (sequence) {
+    camelize:function (string) {
         return "";
     },
 
