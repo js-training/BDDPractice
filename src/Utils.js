@@ -16,7 +16,7 @@ var utils = {
      */
 
     capitalize:function (string) {
-        return string[0].toUpperCase() + string.substr(1, string.length);
+        return _.str.capitalize(string);
     },
 
     /**
@@ -26,13 +26,7 @@ var utils = {
      */
 
     camelize:function (string) {
-        var temp = new Array();
-        var result = "";
-        temp = string.split(" ");
-        for (var i = 0; i < temp.length; i ++){
-            result += this.capitalize(this.trim(temp[i]));
-        }
-        return result;
+        return _.str.camelize(string);
     },
 
     /**
@@ -42,15 +36,7 @@ var utils = {
      */
 
     trim:function (str) {
-        var start = 0;
-        while (str[start] == " "){
-            start++;
-        }
-        var end = str.length-1;
-        while (str[end] == " "){
-            end--;
-        }
-        return str.slice(start, end+1);
+        return _.str.trim(str);
     },
 
     /**

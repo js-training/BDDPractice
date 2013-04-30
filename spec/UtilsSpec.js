@@ -30,6 +30,13 @@ describe("Utils", function() {
             expect(utils.capitalize(firstLetterIsInUpperCase)).toBe(expectedStringStartedWithLetter);
             expect(utils.capitalize(firstCharacterIsNotALetter)).toBe(expectedStringStartedWithNumber);
         });
+
+
+        it("undescore method 'capitalize' should be called", function() {
+            spyOn(_.str, "capitalize");
+            utils.capitalize("test string");
+            expect(_.str.capitalize).toHaveBeenCalledWith("test string");
+        });
     });
 
     describe("When 'camelize' is called", function() {
@@ -38,6 +45,12 @@ describe("Utils", function() {
         it("all spaces in the string should be removed and string converted to UpperCamelCase", function() {
             var camelCaseString = "JasmineIsABehaviorDrivenDevelopmentFrameworkForTestingJavascriptCode";
             expect(utils.camelize(ordinarString)).toBe(camelCaseString);
+        });
+
+        it("undescore method 'camelize' should be called", function() {
+            spyOn(_.str, "camelize");
+            utils.camelize("test string");
+            expect(_.str.camelize).toHaveBeenCalledWith("test string");
         });
     });
 
@@ -48,6 +61,12 @@ describe("Utils", function() {
         it("cut of any count of spaces from the beginning and from the end of the string should be done", function() {
             var expectedString = "Jasmine is a behavior-driven development framework for testing javascript code";
             expect(utils.trim(stringWithSpacesAtTheEndAndBeginning)).toBe(expectedString);
+        });
+
+        it("undescore method 'camelize' should be called", function() {
+            spyOn(_.str, "trim");
+            utils.trim("test string");
+            expect(_.str.trim).toHaveBeenCalledWith("test string");
         });
     });
 
@@ -76,5 +95,14 @@ describe("Utils", function() {
             expect(utils.groupBy(inputList, groupByFunction)).toEqual(expecteObject);
         });
     });
+
+    describe("A spy", function() {
+        it("undescore.spring method 'capitalize' should be called", function() {
+            spyOn(_.str, "trim");
+            utils.trim("test string");
+            expect(_.str.trim).toHaveBeenCalledWith("test string");
+        });
+    });
+
 });
 
