@@ -33,8 +33,8 @@ describe("Utils", function() {
 
 
         it("undescore method 'capitalize' should be called", function() {
-            spyOn(_.str, "capitalize");
-            utils.capitalize("test string");
+            spyOn(_.str, "capitalize").andCallThrough();
+            expect(utils.capitalize("test string")).toEqual(("Test string"));
             expect(_.str.capitalize).toHaveBeenCalledWith("test string");
         });
     });
@@ -48,7 +48,7 @@ describe("Utils", function() {
         });
 
         it("undescore method 'camelize' should be called", function() {
-            spyOn(_.str, "camelize");
+            spyOn(_.str, "camelize").andCallThrough();;
             utils.camelize("test string");
             expect(_.str.camelize).toHaveBeenCalledWith("test string");
         });
@@ -64,7 +64,7 @@ describe("Utils", function() {
         });
 
         it("undescore method 'camelize' should be called", function() {
-            spyOn(_.str, "trim");
+            spyOn(_.str, "trim").andCallThrough();;
             utils.trim("test string");
             expect(_.str.trim).toHaveBeenCalledWith("test string");
         });
@@ -93,14 +93,6 @@ describe("Utils", function() {
                 return typeof element;
             };
             expect(utils.groupBy(inputList, groupByFunction)).toEqual(expecteObject);
-        });
-    });
-
-    describe("A spy", function() {
-        it("undescore.spring method 'capitalize' should be called", function() {
-            spyOn(_.str, "trim");
-            utils.trim("test string");
-            expect(_.str.trim).toHaveBeenCalledWith("test string");
         });
     });
 
