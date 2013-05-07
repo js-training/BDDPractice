@@ -21,7 +21,13 @@ zdom = (function () {
      */
 
     var ZNode = function (selectorOrMarkup, attributes) {
+        this.node = document.createElement(selectorOrMarkup);
 
+        if (attributes) {
+            for (name in attributes){
+                this.attr(name, attributes[name]);
+            }
+        }
     };
 
     /**
@@ -32,7 +38,9 @@ zdom = (function () {
      */
 
     ZNode.prototype.attr = function (name, value) {
-
+        var attr = document.createAttribute(name);
+        attr.nodeValue = value;
+        this.node.setAttributeNode(attr);
     };
 
     /**
@@ -42,7 +50,7 @@ zdom = (function () {
      */
 
     ZNode.prototype.removeAttr = function (name) {
-
+        this.node.removeAttribute(name);
     };
 
 
@@ -52,9 +60,21 @@ zdom = (function () {
      */
 
     ZNode.prototype.hide = function (delay) {
+        var node = this;
+        hideThis = function(){
+            node.removeAttr("visibility");
+            node.attr("visibility", "hidden");
+        } ;
 
+        (delay)? setTimeout(hideThis,delay): hideThis();
     };
 
+
+    /**
+     * Return current element
+     */
+
+    ZNode.prototype.node;
 
     /**
      * Show given element on UI
@@ -62,7 +82,13 @@ zdom = (function () {
      */
 
     ZNode.prototype.show = function (delay) {
+        var node = this;
+        showThis = function(){
+            node.removeAttr("visibility");
+            node.attr("visibility", "visible");
+        } ;
 
+        (delay)? setTimeout(showThis,delay): showThis();
     };
 
     /**
@@ -72,7 +98,7 @@ zdom = (function () {
      */
 
     var factory = function (selectorOrMarkup, attributes) {
-
+        this.ZNode = new ZNode(selectorOrMarkup, attributes);
     };
 
     factory.ZNode = ZNode;
@@ -80,4 +106,19 @@ zdom = (function () {
     return factory
 
 })();
- 
+
+function forEachIn(object, action) {
+    for (var property in object) {
+        if (Object.prototype.hasOwnProperty.call(object, property)) {
+            action(property, object[property]);
+        }
+    }
+}
+
+function getObjectSize(obj) {
+    var size = 0, key; // get the size data
+    for (key in obj) { // check the okeys in the object
+        if (obj.hasOwnProperty(key)) size++; // increase the size
+    }
+    return size; // return the size of the object
+}
